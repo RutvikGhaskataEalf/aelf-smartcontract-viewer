@@ -1,0 +1,52 @@
+{
+  "name": "aelf-smartcontract-viewer",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "npx rollup -c",
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RutvikGhaskataEalf/aelf-smartcontract-viewer"
+  },
+  "description": "A React component to view and interact with Aelf smart contracts",
+  "keywords": [
+    "aelf",
+    "smart contracts",
+    "blockchain",
+    "react",
+    "contract viewer",
+    "aelf-sdk",
+    "dapp"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-typescript": "^12.1.0",
+    "@rollup/plugin-url": "^8.0.2",
+    "@types/loadable__component": "^5.13.9",
+    "@types/react": "^18.3.10",
+    "@vitejs/plugin-react": "^4.3.2",
+    "postcss": "^8.4.47",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rollup": "^4.22.5",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tailwindcss": "^3.4.13",
+    "tslib": "^2.7.0",
+    "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "@loadable/component": "^5.16.4",
+    "@portkey/contracts": "^2.11.0-alpha.16",
+    "@portkey/request": "^2.10.5",
+    "aelf-sdk": "^3.4.15",
+    "antd": "^5.21.2",
+    "clsx": "^2.1.1",
+    "query-string": "^7.1.3"
+  }
+}

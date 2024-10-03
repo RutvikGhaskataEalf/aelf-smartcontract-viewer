@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.contract-view-container {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.contract-view-container .box-wrapper {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px 0 #e2e2e2;
+}
