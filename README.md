@@ -1,13 +1,13 @@
-# aelf-contract-viewer
+# aelf-smartcontract-viewer
 
-The **aelf-contract-viewer** is a React component that provides an easy interface to view and interact with smart contracts on the Aelf blockchain. You can use this component to input contract details and view available read and write methods. This tool is useful for developers building applications around Aelf smart contracts, allowing easy testing and interaction with deployed contracts.
+The **aelf-smartcontract-viewer** is a React component that provides an easy interface to view and interact with smart contracts on the Aelf blockchain. You can use this component to input contract details and view available read and write methods. This tool is useful for developers building applications around Aelf smart contracts, allowing easy testing and interaction with deployed contracts.
 
 ## Installation
 
 You can install the package using npm:
 
 ```base
-npm install aelf-contract-viewer
+npm install aelf-smartcontract-viewer
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm install aelf-contract-viewer
 
 ```typescript
 import React from "react";
-import { ContractView } from "aelf-contract-viewer";
+import { ContractView } from "aelf-smartcontract-viewer";
 
 const App = () => {
   return (
@@ -62,7 +62,7 @@ If you want to specify your own wallet, you can pass the **`wallet`** prop. If y
 
 ```typescript
 import React from "react";
-import { ContractView } from "aelf-contract-viewer";
+import { ContractView } from "aelf-smartcontract-viewer";
 import AElf from "aelf-sdk";
 
 const App = () => {
