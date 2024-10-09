@@ -3,11 +3,67 @@ import * as React from "react";
 import { Divider, Form, Button, Input } from "antd";
 import { useEffect, useState } from "react";
 import { IWalletInfo } from "aelf-sdk/types/wallet";
-import loadable from "@loadable/component";
+import { JSONTree } from "react-json-tree";
 
 import "./index.css";
 import ValueFormItem from "./valueFormItem";
 import { IMethod } from "../../interfaces/index";
+import ResponseDisplay from "./response";
+
+function formatJsonWithTypes(data: any) {
+  let result = "";
+
+  // Helper function to process individual entries (objects or arrays)
+  function processEntry(entry: any, indent = "") {
+    if (Array.isArray(entry)) {
+      entry.forEach((item, index) => {
+        result += `${indent}${index}: \n`;
+        processEntry(item, indent + "  "); // Increase indentation
+      });
+    } else if (typeof entry === "object" && entry !== null) {
+      for (let key in entry) {
+        const value = entry[key];
+        const valueType = Array.isArray(value) ? "array" : typeof value;
+
+        if (valueType === "object") {
+          result += `${indent}${key} [${valueType}]: \n`;
+          processEntry(value, indent + "  ");
+        } else {
+          result += `${indent}${key} [${valueType}]: "${value}"\n`;
+        }
+      }
+    }
+  }
+
+  processEntry(data);
+  return result;
+}
+
+function formatJson(data: any) {
+  let result = "";
+
+  // Helper function to process individual entries (objects or arrays)
+  function processEntry(entry: any, indent = "") {
+    if (Array.isArray(entry)) {
+      entry.forEach((item, index) => {
+        result += `${indent}${index}: \n`;
+        processEntry(item, indent + "  "); // Increase indentation
+      });
+    } else if (typeof entry === "object" && entry !== null) {
+      for (let key in entry) {
+        if (typeof entry[key] === "object") {
+          result += `${indent}${key}: \n`;
+          processEntry(entry[key], indent + "  ");
+        } else {
+          result += `${indent}${key}: "${entry[key]}"\n`;
+        }
+      }
+    }
+  }
+
+  processEntry(data);
+  return result;
+}
 
 export default function FormItem({
   name,
@@ -32,7 +88,7 @@ export default function FormItem({
   useEffect(() => {
     form
       .validateFields({ validateOnly: true })
-      .then((values) => {
+      .then((values: { [s: string]: unknown } | ArrayLike<unknown>) => {
         const task = Object.values(values).every((item) => item || item === 0);
         if (task) {
           setSubmittable(true);
@@ -88,6 +144,34 @@ export default function FormItem({
     }
   };
 
+  const theme = {
+    scheme: "monokai",
+    author: "wimer hazenberg (http://www.monokai.nl)",
+    base00: "transparent",
+    base02: "#49483e",
+    base03: "#75715e",
+    base04: "#a59f85",
+    base05: "#f8f8f2",
+    base06: "#f5f4f1",
+    base07: "#f9f8f5",
+    base08: "#f92672",
+    base09: "#000",
+    base0A: "#f4bf75",
+    base0B: "#000",
+    base0C: "#a1efe4",
+    base0D: "#f92672",
+    base0E: "#ae81ff",
+    base0F: "#cc6633",
+  };
+
+  const response = React.useMemo(() => {
+    if (!res) {
+      return null;
+    } else {
+      return ResponseDisplay({ response: res });
+    }
+  }, [res]);
+
   return (
     <>
       <Form form={form} layout="vertical" name={name} key={name}>
@@ -141,9 +225,13 @@ export default function FormItem({
       {res && (
         <>
           <Divider dashed />
-          <div>Response Body</div>
+          <div>Response</div>
           <div className="overflow-x-auto rasponse-box mt-2">
-            <pre>{JSON.stringify(res, null, 2)}</pre>
+            {!response ? (
+              <JSONTree data={res} theme={theme} invertTheme={false} />
+            ) : (
+              response
+            )}
           </div>
         </>
       )}

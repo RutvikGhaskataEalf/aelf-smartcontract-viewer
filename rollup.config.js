@@ -20,7 +20,7 @@ export default defineConfig({
     'clsx',
     'copy-to-clipboard',
     'query-string',
-    '@loadable/component'
+    'react-json-tree'
   ],
   plugins: [
     typescript({ tsconfig: "tsconfig.json" }),
